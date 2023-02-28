@@ -18,22 +18,24 @@ function App() {
     return num
   }
   
+  const getNewTree = () => {
+    tree.add(generateNumber())
+    return cloneDeep(tree)
+  }
+
+  const addNumberToTree = (event) => {
+    if (event.code === 'Space') {
+      setTree(getNewTree)
+    }
+  };
 
   useEffect(() => {
-    const getNewTree = () => {
-      tree.add(generateNumber())
-      return cloneDeep(tree)
-    }
-    const addNumberToTree = (event) => {
-      if (event.code === 'Space') {
-        setTree(getNewTree)
-      }
-    };
+    
     window.addEventListener('keydown', addNumberToTree);
     return () => {
       window.removeEventListener('keydown', addNumberToTree);
     };
-  }, [tree]);
+  }, );
 
   
 
